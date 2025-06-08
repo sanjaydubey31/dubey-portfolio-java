@@ -10,6 +10,13 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build with Gradle
+        run: ./gradlew build
       - name: build image
         run: docker build . --file Dockerfile --tag dubey-portfolio-java:latest
       - name: push image to docker hub
