@@ -1,0 +1,19 @@
+name: Build and Publish image to Docker Hub
+
+on:
+  [workflow_dispatch]
+
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build image
+        run: docker build . --file Dockerfile --tag dubey-portfolio-java:latest
+      - name: push image to docker hub
+        run: |
+          docker login -u sanjaydubey733 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push sanjaydubey733/dubey-portfolio-java:latest
+
