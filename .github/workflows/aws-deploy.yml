@@ -32,6 +32,15 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: List build/libs contents
+        run: ls -l build/libs
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag sanjaydubey733/dubey-portfolio-java:latest
+
       - name: Build, tag, and push Docker image to ECR
         id: build-image
         env:
