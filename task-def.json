@@ -1,0 +1,21 @@
+{
+  "family": "dubey-portfolio-task-def",
+  "executionRoleArn": "arn:aws:iam::976193251808:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "dubey-portfolio-container",
+      "image": "976193251808.dkr.ecr.us-east-1.amazonaws.com/dubey-portfolio-ecr-repo:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ]
+}
