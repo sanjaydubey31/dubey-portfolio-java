@@ -86,6 +86,5 @@
   },
   "registeredAt": "2025-06-09T11:35:23.274Z",
   "registeredBy": "arn:aws:iam::976193251808:user/sanjaykdubey",
-  "enableFaultInjection": false,
   "tags": []
 }
