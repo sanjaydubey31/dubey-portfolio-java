@@ -1,0 +1,203 @@
+$ ./deploy-to-ecs.sh
+Default VPC ID: vpc-03372e3b4272170f6
+Subnets: subnet-030e4aacadadb9b3d, subnet-09f4f32138879a1ed
+Security Group ID: sg-09821ff9e6b37e8ad
+Creating IAM Role for ECS Task Execution...
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "ecsTaskExecutionRole",
+        "RoleId": "AROA6GSNG5HQL4GEBB3OQ",
+        "Arn": "arn:aws:iam::976193251808:role/ecsTaskExecutionRole",
+        "CreateDate": "2025-06-08T18:40:25+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "ecs-tasks.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}
+
+Waiting for IAM role propagation...
+Creating ECR repository...
+
+An error occurred (RepositoryAlreadyExistsException) when calling the CreateRepository operation: The repository with name 'dubey-portfolio-ecr-repo' already exists in the registry with id '976193251808'
+ECR repo may already exist.
+Creating ECS Cluster...
+{
+    "cluster": {
+        "clusterArn": "arn:aws:ecs:us-east-1:976193251808:cluster/dubey-portfolio-ecs-cluster",
+        "clusterName": "dubey-portfolio-ecs-cluster",
+        "status": "ACTIVE",
+        "registeredContainerInstancesCount": 0,
+        "runningTasksCount": 0,
+        "pendingTasksCount": 0,
+        "activeServicesCount": 0,
+        "statistics": [],
+        "tags": [],
+        "settings": [
+            {
+                "name": "containerInsights",
+                "value": "disabled"
+            }
+        ],
+        "capacityProviders": [],
+        "defaultCapacityProviderStrategy": []
+    }
+}
+
+Generating ECS Task Definition JSON...
+Task definition saved to task-def.json
+Registering ECS Task Definition...
+{
+    "taskDefinition": {
+        "taskDefinitionArn": "arn:aws:ecs:us-east-1:976193251808:task-definition/dubey-portfolio-task-def:1",
+        "containerDefinitions": [
+            {
+                "name": "dubey-portfolio-container",
+                "image": "976193251808.dkr.ecr.us-east-1.amazonaws.com/dubey-portfolio-ecr-repo:latest",
+                "cpu": 0,
+                "portMappings": [
+                    {
+                        "containerPort": 80,
+                        "hostPort": 80,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "environment": [],
+                "mountPoints": [],
+                "volumesFrom": [],
+                "systemControls": []
+            }
+        ],
+        "family": "dubey-portfolio-task-def",
+        "executionRoleArn": "arn:aws:iam::976193251808:role/ecsTaskExecutionRole",
+        "networkMode": "awsvpc",
+        "revision": 1,
+        "volumes": [],
+        "status": "ACTIVE",
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.ecr-auth"
+            },
+            {
+                "name": "ecs.capability.execution-role-ecr-pull"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            },
+            {
+                "name": "ecs.capability.task-eni"
+            }
+        ],
+        "placementConstraints": [],
+        "compatibilities": [
+            "EC2",
+            "FARGATE"
+        ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "256",
+        "memory": "512",
+        "registeredAt": "2025-06-08T14:40:39.715000-04:00",
+        "registeredBy": "arn:aws:iam::976193251808:user/sanjaykdubey"
+    }
+}
+
+Creating ECS Service...
+{
+    "service": {
+        "serviceArn": "arn:aws:ecs:us-east-1:976193251808:service/dubey-portfolio-ecs-cluster/dubey-portfolio-ecs-service",
+        "serviceName": "dubey-portfolio-ecs-service",
+        "clusterArn": "arn:aws:ecs:us-east-1:976193251808:cluster/dubey-portfolio-ecs-cluster",
+        "loadBalancers": [],
+        "serviceRegistries": [],
+        "status": "ACTIVE",
+        "desiredCount": 1,
+        "runningCount": 0,
+        "pendingCount": 0,
+        "launchType": "FARGATE",
+        "platformVersion": "LATEST",
+        "platformFamily": "Linux",
+        "taskDefinition": "arn:aws:ecs:us-east-1:976193251808:task-definition/dubey-portfolio-task-def:1",
+        "deploymentConfiguration": {
+            "deploymentCircuitBreaker": {
+                "enable": false,
+                "rollback": false
+            },
+            "maximumPercent": 200,
+            "minimumHealthyPercent": 100
+        },
+        "deployments": [
+            {
+                "id": "ecs-svc/2142259878193715134",
+                "status": "PRIMARY",
+                "taskDefinition": "arn:aws:ecs:us-east-1:976193251808:task-definition/dubey-portfolio-task-def:1",
+                "desiredCount": 0,
+                "pendingCount": 0,
+                "runningCount": 0,
+                "failedTasks": 0,
+                "createdAt": "2025-06-08T14:40:41.195000-04:00",
+                "updatedAt": "2025-06-08T14:40:41.195000-04:00",
+                "launchType": "FARGATE",
+                "platformVersion": "1.4.0",
+                "platformFamily": "Linux",
+                "networkConfiguration": {
+                    "awsvpcConfiguration": {
+                        "subnets": [
+                            "subnet-030e4aacadadb9b3d",
+                            "subnet-09f4f32138879a1ed"
+                        ],
+                        "securityGroups": [
+                            "sg-09821ff9e6b37e8ad"
+                        ],
+                        "assignPublicIp": "ENABLED"
+                    }
+                },
+                "rolloutState": "IN_PROGRESS",
+                "rolloutStateReason": "ECS deployment ecs-svc/2142259878193715134 in progress."
+            }
+        ],
+        "roleArn": "arn:aws:iam::976193251808:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+        "events": [],
+        "createdAt": "2025-06-08T14:40:41.195000-04:00",
+        "placementConstraints": [],
+        "placementStrategy": [],
+        "networkConfiguration": {
+            "awsvpcConfiguration": {
+                "subnets": [
+                    "subnet-030e4aacadadb9b3d",
+                    "subnet-09f4f32138879a1ed"
+                ],
+                "securityGroups": [
+                    "sg-09821ff9e6b37e8ad"
+                ],
+                "assignPublicIp": "ENABLED"
+            }
+        },
+        "healthCheckGracePeriodSeconds": 0,
+        "schedulingStrategy": "REPLICA",
+        "deploymentController": {
+            "type": "ECS"
+        },
+        "createdBy": "arn:aws:iam::976193251808:user/sanjaykdubey",
+        "enableECSManagedTags": false,
+        "propagateTags": "NONE",
+        "enableExecuteCommand": false,
+        "availabilityZoneRebalancing": "DISABLED"
+    }
+}
+
+✅ Deployment complete!
+📦 Task definition JSON stored in: task-def.json
+
+
