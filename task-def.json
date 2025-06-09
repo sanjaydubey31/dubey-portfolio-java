@@ -3,7 +3,7 @@
   "containerDefinitions": [
       {
           "name": "test-dubey",
-          "image": "976193251808.dkr.ecr.us-east-1.amazonaws.com/dubey-portfolio-ecr-repo:5c357cba9dcc5ac9d5e404b4b519fc2208aa914e",
+          "image": "976193251808.dkr.ecr.us-east-1.amazonaws.com/dubey-portfolio-ecr-repo:latest",
           "cpu": 0,
           "portMappings": [
               {
