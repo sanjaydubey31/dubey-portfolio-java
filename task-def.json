@@ -1,90 +1,42 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:976193251808:task-definition/test-dubey-manual:1",
-  "containerDefinitions": [
+    "family": "test-dubey-manual",
+    "executionRoleArn": "arn:aws:iam::976193251808:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
       {
-          "name": "test-dubey",
-          "image": "976193251808.dkr.ecr.us-east-1.amazonaws.com/dubey-portfolio-ecr-repo:latest",
-          "cpu": 0,
-          "portMappings": [
-              {
-                  "name": "test-dubey-8080-tcp",
-                  "containerPort": 8080,
-                  "hostPort": 8080,
-                  "protocol": "tcp",
-                  "appProtocol": "http"
-              }
-          ],
-          "essential": true,
-          "environment": [],
-          "environmentFiles": [],
-          "mountPoints": [],
-          "volumesFrom": [],
-          "ulimits": [],
-          "logConfiguration": {
-              "logDriver": "awslogs",
-              "options": {
-                  "awslogs-group": "/ecs/test-dubey-manual",
-                  "mode": "non-blocking",
-                  "awslogs-create-group": "true",
-                  "max-buffer-size": "25m",
-                  "awslogs-region": "us-east-1",
-                  "awslogs-stream-prefix": "ecs"
-              },
-              "secretOptions": []
-          },
-          "systemControls": []
+        "name": "test-dubey",
+        "image": "976193251808.dkr.ecr.us-east-1.amazonaws.com/dubey-portfolio-ecr-repo:latest",
+        "cpu": 0,
+        "memory": 512,
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 8080,
+            "hostPort": 8080,
+            "protocol": "tcp",
+            "name": "test-dubey-8080-tcp",
+            "appProtocol": "http"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/test-dubey-manual",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs",
+            "awslogs-create-group": "true",
+            "mode": "non-blocking",
+            "max-buffer-size": "25m"
+          }
+        }
       }
-  ],
-  "family": "test-dubey-manual",
-  "executionRoleArn": "arn:aws:iam::976193251808:role/ecsTaskExecutionRole",
-  "networkMode": "awsvpc",
-  "revision": 1,
-  "volumes": [],
-  "status": "ACTIVE",
-  "requiresAttributes": [
-      {
-          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-      },
-      {
-          "name": "ecs.capability.execution-role-awslogs"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.ecr-auth"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
-      },
-      {
-          "name": "ecs.capability.execution-role-ecr-pull"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-      },
-      {
-          "name": "ecs.capability.task-eni"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-      }
-  ],
-  "placementConstraints": [],
-  "compatibilities": [
-      "EC2",
-      "FARGATE"
-  ],
-  "requiresCompatibilities": [
-      "FARGATE"
-  ],
-  "cpu": "1024",
-  "memory": "3072",
-  "runtimePlatform": {
+    ],
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
       "cpuArchitecture": "X86_64",
       "operatingSystemFamily": "LINUX"
-  },
-  "registeredAt": "2025-06-09T11:35:23.274Z",
-  "registeredBy": "arn:aws:iam::976193251808:user/sanjaykdubey",
-  "tags": []
-}
+    }
+  }
+  
