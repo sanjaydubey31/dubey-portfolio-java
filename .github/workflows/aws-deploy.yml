@@ -6,6 +6,7 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: dubey-portfolio-ecr-repo
+  ECS_SERVICE: test-dubey-manual-service-hiolmdl7
   ECS_CLUSTER: test-dubey
   ECS_TASK_DEFINITION: task-def.json
   CONTAINER_NAME: test-dubey
@@ -65,5 +66,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true

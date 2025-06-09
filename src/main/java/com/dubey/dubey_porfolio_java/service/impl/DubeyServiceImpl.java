@@ -11,7 +11,7 @@ public class DubeyServiceImpl implements DubeyService {
 
     @Override
     public String getHello() {
-        return "Hello, World! (GET - Service), my name is Sanjay Dubey! This microservice is deployed on ECS Fargate from ECR using GitHub Actions";
+        return "<h1>Hello, World! (GET - Service), my name is Sanjay Dubey! This dubey-portfolio-java microservice is deployed on ECS Fargate from ECR using GitHub Actions</h1>";
     }
 
     @Override
